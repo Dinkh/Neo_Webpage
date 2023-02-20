@@ -1,0 +1,11 @@
+CSS
+- an richtige Stelle die custom css verschieben, so dass diese automatisch gebaut werden.
+
+Views
+- Weitere DatenQuellen
+- Anbindung an Charts
+- Einbinden von Toasts wenn nicht valid
+
+Windows
+- Korrekte Berechnung von DPI
+- Fenster Layout top usw validieren

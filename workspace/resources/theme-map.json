@@ -1,0 +1,715 @@
+{
+  "apps": {
+    "covid": {
+      "AttributionComponent": [
+        "src"
+      ],
+      "country": {
+        "Gallery": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "Helix": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "HistoricalDataTable": [
+          "src"
+        ],
+        "LineChartComponent": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "Table": [
+          "src"
+        ]
+      },
+      "HeaderContainer": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ],
+      "MainContainer": [
+        "src"
+      ]
+    },
+    "docs": {
+      "classdetails": {
+        "HeaderComponent": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "HierarchyTreeList": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "MainContainer": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "MembersList": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "TutorialComponent": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ]
+      },
+      "ContentTabContainer": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ],
+      "ExamplesTreeList": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ],
+      "HeaderContainer": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ],
+      "MainContainer": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ],
+      "TutorialsTreeList": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ]
+    },
+    "realworld2": {
+      "article": {
+        "Gallery": [
+          "src"
+        ],
+        "Helix": [
+          "src"
+        ],
+        "PreviewComponent": [
+          "src"
+        ],
+        "TagListComponent": [
+          "src"
+        ]
+      },
+      "FooterComponent": [
+        "src"
+      ],
+      "HeaderToolbar": [
+        "src"
+      ],
+      "HomeContainer": [
+        "src"
+      ],
+      "MainContainer": [
+        "src"
+      ]
+    },
+    "website": {
+      "blog": {
+        "Container": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ],
+        "List": [
+          "src"
+        ]
+      },
+      "examples": {
+        "List": [
+          "src"
+        ]
+      },
+      "HeaderContainer": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ],
+      "home": {
+        "TabContainer": [
+          "src",
+          "theme-dark",
+          "theme-light"
+        ]
+      },
+      "MainContainer": [
+        "src",
+        "theme-dark",
+        "theme-light"
+      ]
+    },
+    "web": {
+      "colors": [
+        "src"
+      ],
+      "MainContainer": [
+        "src"
+      ],
+      "src": {
+        "button": {
+          "Alert": [
+            "src"
+          ]
+        }
+      },
+      "items": {
+        "Layout": [
+          "src"
+        ],
+        "DataTile": [
+          "src"
+        ],
+        "EmptyTile": [
+          "src"
+        ],
+        "Section": [
+          "src"
+        ]
+      },
+      "main": {
+        "Navigation": [
+          "src"
+        ],
+        "Layout": [
+          "src"
+        ],
+        "Footer": [
+          "src"
+        ],
+        "Dashboard": [
+          "src"
+        ],
+        "AddNew": [
+          "src"
+        ]
+      }
+    }
+  },
+  "Neo": {
+    "button": {
+      "Base": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Split": [
+        "src"
+      ]
+    },
+    "calendar": {
+      "view": {
+        "calendars": {
+          "ColorsList": [
+            "src"
+          ],
+          "Container": [
+            "src"
+          ],
+          "EditContainer": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ],
+          "List": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ]
+        },
+        "DayComponent": [
+          "src"
+        ],
+        "EditEventContainer": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "MainContainer": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "month": {
+          "Component": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ]
+        },
+        "SettingsContainer": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "week": {
+          "Component": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ],
+          "TimeAxisComponent": [
+            "src"
+          ]
+        },
+        "YearComponent": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ]
+      }
+    },
+    "component": {
+      "BoxLabel": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Carousel": [
+        "src"
+      ],
+      "Chip": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Circle": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Clock": [
+        "src"
+      ],
+      "DateSelector": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Gallery": [
+        "src"
+      ],
+      "Helix": [
+        "src"
+      ],
+      "Iframe": [
+        "src"
+      ],
+      "Label": [
+        "src"
+      ],
+      "Splitter": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Toast": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "container": {
+      "Base": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Panel": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Viewport": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "dialog": {
+      "Base": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "draggable": {
+      "DragProxyComponent": [
+        "src"
+      ],
+      "list": {
+        "DragZone": [
+          "src"
+        ]
+      },
+      "toolbar": {
+        "SortZone": [
+          "src"
+        ]
+      },
+      "tree": {
+        "DragZone": [
+          "src"
+        ]
+      }
+    },
+    "examples": {
+      "calendar": {
+        "basic": {
+          "MainContainer": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ]
+        }
+      },
+      "component": {
+        "coronaGallery": {
+          "CountryGallery": [
+            "src"
+          ]
+        },
+        "coronaHelix": {
+          "CountryHelix": [
+            "src"
+          ]
+        }
+      },
+      "ConfigurationPanel": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "grid": {
+        "covid": {
+          "GridContainer": [
+            "src"
+          ]
+        }
+      },
+      "list": {
+        "animate": {
+          "List": [
+            "src"
+          ]
+        }
+      },
+      "table": {
+        "covid": {
+          "TableContainer": [
+            "src"
+          ]
+        }
+      }
+    },
+    "filter": {
+      "BooleanContainer": [
+        "src"
+      ],
+      "NumberContainer": [
+        "src"
+      ]
+    },
+    "form": {
+      "Container": [
+        "src"
+      ],
+      "field": {
+        "CheckBox": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Color": [
+          "src"
+        ],
+        "Date": [
+          "src"
+        ],
+        "Display": [
+          "src"
+        ],
+        "Number": [
+          "src"
+        ],
+        "Picker": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Radio": [
+          "src"
+        ],
+        "Range": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Search": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Select": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Text": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "TextArea": [
+          "src"
+        ],
+        "Time": [
+          "src"
+        ],
+        "trigger": {
+          "Base": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ],
+          "Clear": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ],
+          "CopyToClipboard": [
+            "src"
+          ],
+          "Time": [
+            "src",
+            "theme-dark",
+            "theme-light",
+            "theme-web-light"
+          ]
+        }
+      },
+      "Fieldset": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "global": {
+      "MouseCursor": [
+        "src"
+      ]
+    },
+    "Global": [
+      "src",
+      "theme-dark",
+      "theme-light",
+      "theme-web-light"
+    ],
+    "grid": {
+      "Container": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "header": {
+        "Button": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Toolbar": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ]
+      },
+      "View": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "layout": {
+      "Card": [
+        "src"
+      ],
+      "Fit": [
+        "src"
+      ],
+      "Flexbox": [
+        "src"
+      ],
+      "Grid": [
+        "src"
+      ]
+    },
+    "list": {
+      "Base": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Chip": [
+        "src"
+      ],
+      "Circle": [
+        "src"
+      ],
+      "Color": [
+        "src"
+      ]
+    },
+    "menu": {
+      "List": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Panel": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "plugin": {
+      "Resizable": [
+        "src"
+      ]
+    },
+    "sitemap": {
+      "Component": [
+        "src"
+      ]
+    },
+    "tab": {
+      "Container": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "header": {
+        "Button": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Toolbar": [
+          "src"
+        ]
+      },
+      "Strip": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "table": {
+      "Container": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "header": {
+        "Button": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ],
+        "Toolbar": [
+          "src",
+          "theme-dark",
+          "theme-light",
+          "theme-web-light"
+        ]
+      },
+      "View": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    },
+    "toolbar": {
+      "Base": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ],
+      "Paging": [
+        "src"
+      ],
+      "Breadcrumb": [
+        "src"
+      ]
+    },
+    "tooltip": {
+      "Base": [
+        "src"
+      ]
+    },
+    "tree": {
+      "List": [
+        "src",
+        "theme-dark",
+        "theme-light",
+        "theme-web-light"
+      ]
+    }
+  }
+}

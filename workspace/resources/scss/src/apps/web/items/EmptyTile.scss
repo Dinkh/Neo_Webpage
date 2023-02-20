@@ -1,0 +1,74 @@
+.data-container {
+  background: rgb(56, 56, 56);
+  background: var(--background-gradient);
+}
+
+.empty-tile {
+  position: relative;
+  background: hsl(222, 45%, 7%);
+  padding: 2rem;
+  margin: 0.9rem 1.1rem;
+  border-radius: 1rem;
+  color: white;
+  font-size: 1rem;
+  text-shadow: 0 0 0.3em currentColor;
+
+  transition: transform 250ms ease-in;
+  transform-style: preserve-3d;
+  transform: perspective(5000px) rotateY(0deg) rotateX(0deg);
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+  }
+
+  // Schatten
+  &::before {
+    inset: 0.25rem;
+    background: black;
+    transform: translateZ(-49px);
+    filter: blur(15px);
+    opacity: 0.9;
+  }
+
+  // Grundebene
+  &::after {
+    inset: -1rem;
+    background: linear-gradient(-45deg, blue, red);
+    transform: translateZ(-50px);
+  }
+
+  // Hover
+  &:hover {
+    transition: transform 125ms ease-in;
+    transform: perspective(5000px) rotateY(7deg) rotateX(7deg);
+    cursor: all-scroll;
+  }
+
+  // Black layer
+  .output-text {
+    flex: 1;
+    font-size: 2.5rem;
+    overflow: hidden;
+    color: #333;
+    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  // Hover Overlay
+  .allow-pop-out {
+    transform: translateZ(10px);
+    position: absolute;
+    inset: 0;
+    color: hsl(177, 100%, 33%);
+    text-shadow: none;
+    text-align: center;
+    font-size: 6rem;
+    opacity: 0;
+    transition: opacity 0.25s ease-in;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.web-footer {
+  background-color: var(--primary-950);
+  box-shadow: inset 0 5px 10px rgb(0 0 0 / 25%);
+  border-top: 1px solid var(--primary-800);
+  text-align: center;
+
+  .neo-section-inner {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & > div {
+      flex: none;
+    }
+  }
+
+  a {
+    color: var(--primary-600);
+  }
+
+}

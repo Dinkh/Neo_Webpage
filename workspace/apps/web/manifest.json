@@ -1,0 +1,14 @@
+{
+  "short_name": "Neo Web Application",
+  "name": "Neo - Web Data Application",
+  "id": "/apps/web/index.html",
+  "start_url": "/",
+  "background_color": "#b8b091",
+  "display": "minimal-ui",
+  "orientation": "portrait",
+  "scope": "/",
+  "theme_color": "#b8b091",
+  "description": "Website which demos the possibilities of creating external windows, still connected to the data-source.",
+  "protocol_handlers": [{"protocol": "web+neo" ,"url": "/web?type=%s"}],
+  "icons": [{"src": "./Neo.svg", "sizes":  "any"}]
+}

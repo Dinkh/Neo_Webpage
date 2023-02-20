@@ -1,0 +1,28 @@
+/* ANIMATED BACKGROUND */
+body > .web-main {
+  overflow-y: auto;
+  user-select:none;
+
+  background-image: var(--page-background-gradient);
+  background-size: 400%;
+  animation: bg-animation 15s infinite alternate;
+}
+
+@keyframes bg-animation {
+  0% {background-position: left}
+  100% {background-position: right}
+}
+
+/* TOASTS */
+.neo-toast-tr {
+  top: 4.5rem!important;
+  right: 2rem!important;
+}
+
+/* LOGO */
+.web-navigation-logo {
+  height: 50px;
+  width: 75px;
+  background: url("..//Neo.svg");
+  background-size: 100% 100%;
+}

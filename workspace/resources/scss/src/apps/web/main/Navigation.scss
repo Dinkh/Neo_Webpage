@@ -1,0 +1,50 @@
+.web-navigation {
+  z-index:10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--primary-50);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem!important;
+
+  font-size: 1.25rem;
+
+  nav > a {
+    padding-left: 3rem;
+  }
+
+  i {
+    flex: 1%;
+  }
+
+  .brand-image {
+    height: 100px;
+    width: 100px;
+    transition: all 50ms ease-in;
+  }
+  &.small {
+    opacity: .9;
+
+    .brand-image {
+      height: 60px;
+      width: 60px;
+      transition: all 150ms ease-in;
+    }
+  }
+
+  .brand {
+    padding-left: 2rem;
+  }
+}
+
+// ToDo add scroll listener to remove the target onScroll
+:target::before {
+  content: "";
+  display: block;
+  height: 100px; /* Set the height to the height of the fixed navigation bar */
+  //margin: -00px 0 0; /* Set the negative margin to the height of the fixed navigation bar to offset the jump position */
+}

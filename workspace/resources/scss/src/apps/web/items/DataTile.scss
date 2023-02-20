@@ -1,0 +1,123 @@
+.data-container {
+  background: rgb(56,56,56);
+  background: var(--background-gradient);
+}
+
+.data-tile {
+  position: relative;
+  background: hsl(222, 45%, 7%);
+  padding: 2rem;
+  margin: 0.9rem 1.1rem;
+  //margin: 2rem;
+  border-radius: 1rem;
+  color: white;
+  font-size: 1rem;
+  text-shadow: 0 0 0.3em currentColor;
+
+  transition: transform 250ms ease-in;
+  transform-style: preserve-3d;
+  transform: perspective(5000px) rotateY(0deg) rotateX(0deg);
+
+  & > div {
+    user-select: none;
+  }
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+  }
+
+  &::before {
+    inset: 0.25rem;
+    background: black;
+    transform: translateZ(-49px);
+    filter: blur(15px);
+    opacity: 0.9;
+  }
+
+  &::after {
+    inset: -1rem;
+    background: linear-gradient(-45deg, blue, red);
+    transform: translateZ(-50px);
+  }
+
+  &:not(.windowed):hover {
+    transition: transform 125ms ease-in;
+    transform: perspective(5000px) rotateY(25deg) rotateX(25deg);
+    cursor: all-scroll;
+  }
+
+  .output-text {
+    flex: 1;
+    overflow: hidden;
+  }
+
+
+  .data-tile-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1.2rem;
+    border-bottom: 1px solid hsl(240, 15%, 20%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .connecting, .receiving, .ended {
+      height: .75rem;
+      width: .75rem;
+      margin: 0 0.25rem;
+      transition: background-color 0.15s ease-in;
+    }
+
+    .connecting {
+      border-radius: 50%;
+      background-color: #54522a;
+    }
+
+    .receiving {
+      border-radius: 50%;
+      background-color: #2c4e28;
+    }
+
+    .ended {
+      border-radius: 50%;
+      background-color: #3b1d1d;
+    }
+  }
+
+  &.connect .connecting {
+    background-color: #b7b71c;
+  }
+
+  &.receive .receiving {
+    background-color: #00ff00;
+  }
+
+  &.end .ended {
+    background-color: #8b0000;
+  }
+}
+
+.data-tile {
+  .allow-pop-out {
+    transform: translateZ(10px);
+    position: absolute;
+    inset: 0;
+//    width: 50%;
+    border-radius: inherit;
+    color: hsl(177, 100%, 33%);
+    text-shadow: none;
+    text-align: center;
+    font-size: 6rem;
+    opacity: 0;
+    background-color: hsla(177, 40%, 12%, 0.5);
+    transition: opacity 0.25s ease-in;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

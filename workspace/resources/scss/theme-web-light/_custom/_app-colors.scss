@@ -1,0 +1,24 @@
+:root .neo-theme-web-light.neo-body, :root .neo-body .neo-theme-web-light{
+  --viewport-background-color : var(--primary-900);
+  --neo-background-color      : var(--primary-900);
+  --neo-background-hover-color: var(--primary-800);
+  --neo-border-color          : var(--primary-700);
+  --neo-color                 : var(--primary-300);
+
+  --background-gradient: linear-gradient(0deg, rgba(23,30,33, 0.25) 4%, rgba(23,30,33, 0.8) 35%, var(--primary-950) 50%);
+  //--page-background-gradient: linear-gradient(0deg, var(--primary-900) 4%, var(--primary-950) 50%);
+  --page-background-gradient: linear-gradient(45deg, var(--primary-800), #170034);
+
+  --dialog-border-color: var(--neo-border-color);
+  --dialog-header-color: var(--neo-color);
+  --dialog-icon-color  : var(--neo-color);
+
+  --toolbar-background-color: var(--primary-950);
+
+  --button-background-color       : var(--neo-background-color);
+  --button-border-color          :var(--neo-border-color);
+  --button-hover-background-color:  var(--neo-background-hover-color);
+
+  --container-background-color: var(--neo-background-color);
+  --container-color: var(--neo-color);
+}

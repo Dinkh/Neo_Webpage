@@ -24,18 +24,28 @@
 
   align-items: flex-start!important;
 
+  .neo-disabled.neo-button {
+    background-color: #ffffcf;
+    //background-color: #999965;
+    opacity: .65;
+  }
   .neo-button {
     width: 150px;
     background-color: lightgoldenrodyellow;
 
     transition: all 0.25s .1s;
 
-    &:hover .neo-button-glyph::before {
-      background-color: lightgoldenrodyellow;
+    &:hover {
+      .neo-button-text {
+        color: lightgoldenrodyellow;
+      }
+      .neo-button-glyph::before {
+        background-color: lightgoldenrodyellow;
+      }
     }
 
     &.neo-disabled .neo-button-text {
-      color: var(--primary-100);
+      color: var(--primary-200);
     }
 
     &.neo-button-granted {

@@ -39,12 +39,15 @@ class MainContainerController extends Component {
         const me = this,
             isPWA = await Neo.main.addon.ScreenDetails.isPWA();
 
-        me.getModel().setData({isPWA: isPWA ? 'granted' : 'denied'});
+        me.getModel().setData({isPWA: isPWA ? 'granted' : 'pendend'});
 
         if(isPWA) {
             Neo.main.addon.ScreenDetails.setStartingPosition();
         }
 
+        me.addDomListeners('appinstalled', () => {
+            me.getModel().setData({isPWA: true});
+        })
         // todo update ViewModel when app installed
         // me.on('appinstalled', () => {
         //     me.getModel().setData({isPWA: true});

@@ -19,11 +19,7 @@ class MainContainerModel extends Component {
             isDisplayGranted: null,
             isMultiScreen: null,
             navigationIsSmall: false
-        },
-        /**
-         * @member {Object} stores
-         */
-        stores: {}
+        }
     }
 }
 

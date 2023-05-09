@@ -25,7 +25,7 @@ class Welcome extends Section {
             vdom: {cn: [
                 { tag: 'h1', innerHTML: 'Welcome to Neo.MJS', style: {textAlign: 'center'} },
                 { tag: 'h2', innerHTML: 'you can use Neo.MJS like you use Graphana', style: {textAlign: 'center'} },
-                { style: {paddingBottom: '3rem'},
+                { style: {paddingBottom: '3rem', textAlign: 'center'},
                     innerHTML: 'Mit dieser Seite möchte ich Euch die Multi Screen Fähigkeit von Neo.MJS vorstellen.<br><br>' +
                         'Für eine Multi Screen Demonstration benötigt Ihr bestenfalls natürlich mehrere Monitore.<br><br>' +
                         'Sobald Du die Freigabe erteilt hast, kannst Du Data-Views auf andere Monitore per Drag&Drop verschieben.<br><br>' +

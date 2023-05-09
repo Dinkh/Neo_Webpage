@@ -1,9 +1,10 @@
 .web-navigation {
   z-index:10;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  border-radius: 5px;
   background-color: var(--primary-50);
 
   display: flex;
@@ -24,22 +25,24 @@
   .brand-image {
     height: 100px;
     width: 100px;
-    transition: all 50ms ease-in;
-  }
-  &.small {
-    opacity: .9;
-
-    .brand-image {
-      height: 60px;
-      width: 60px;
-      transition: all 150ms ease-in;
-    }
+    transition: all 0.1s ease-in;
   }
 
   .brand {
     padding-left: 2rem;
   }
 }
+
+.small .web-navigation {
+  opacity: .9;
+
+  .brand-image {
+    height: 60px;
+    width: 60px;
+    transition: all 0.5s ease-in;
+  }
+}
+
 
 // ToDo add scroll listener to remove the target onScroll
 :target::before {

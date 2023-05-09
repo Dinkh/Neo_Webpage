@@ -1,55 +1,47 @@
 Neo.overwrites = {
-    // Web.view.src.button.Alert
-    // Web: {
-    //     view: {
-    //         src: {
-    //             button: {
-    //                 Alert: {
-    //                     // gibt es schon
-    //                     maxHeight: 100,
-    //                     // ist neu
-    //                     beforeSetMaxHeight(value) {
-    //                         let maxValue = 50;
-    //                         return (value > maxValue) ? maxValue : value;
-    //                     },
-    //
-    //                     // komplett neu
-    //                     foo_: null,
-    //                     afterSetFoo(value, oldValue) {
-    //                         let style = this.style;
-    //                         style.maxWidth = value ? '100px' : 'auto';
-    //                         this.style = style;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // },
-
     // Neo.component.Base
-    // Neo: {
-    //     component: {
-    //         Base: {
-    //             // new config
-    //             bar: 2,
-    //             // existing config, but now with trailing underscore
-    //             // which calls afterSetFlex on change
-    //             flex_: 1,
-    //
-    //             // new method
-    //             afterSetFlex(value, oldValue) {
-    //                 console.log('[Overwrite:afterSetFlex] value: ' + value);
-    //             },
-    //
-    //             // existing method
-    //             afterSetHeight(value, oldValue) {
-    //                 console.log('[Overwrite:afterSetHeight] before callOverriden');
-    //                 this.callOverwritten(...arguments);
-    //                 console.log('[Overwrite:afterSetHeight] after callOverriden');
-    //             }
-    //         }
-    //     }
-    // }
+    Neo: {
+        component: {
+            Base: {
+                afterSetDomListeners(value, oldValue) {
+                    let me = this;
+
+                    me.presetListenersScope(value);
+                    me.callOverwritten(...arguments);
+                },
+
+                presetListenersScope(listenersArray) {
+                    let me = this;
+
+                    listenersArray.forEach((listeners) => {
+                        for (const ev in listeners) {
+                            const listener = listeners[ev];
+                            if(!Neo.isFunction(listener.fn) && listener.scope === 'this') {
+                                listener.fn = me[listener.fn].bind(me);
+                            }
+                        }
+                    });
+                    return listenersArray;
+                }
+            }
+        },
+        button: {
+            Base: {
+                displaySmall_: false,
+                orgText: null,
+                afterSetDisplaySmall(newValue) {
+                    const me = this,
+                        text = me.text;
+                    let orgText = me.orgText;
+
+                    if (!newValue && text) orgText = text;
+
+                    me.orgText = newValue ? text : null;
+                    me.text = !newValue ? orgText : null;
+                }
+            }
+        }
+    }
 };
 
 export default Neo.overwrites;

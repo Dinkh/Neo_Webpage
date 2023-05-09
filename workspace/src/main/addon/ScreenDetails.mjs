@@ -1,4 +1,4 @@
-import Base     from '../../../node_modules/neo.mjs/src/core/Base.mjs';
+import Base from '../../../node_modules/neo.mjs/src/core/Base.mjs';
 import NeoArray from "../../../node_modules/neo.mjs/src/util/Array.mjs";
 
 /**
@@ -34,6 +34,14 @@ class ScreenDetails extends Base {
          */
         remote: {
             app: [
+                'askForPermission',
+                'getAllScreens',
+                'getWindowScreen',
+                'isMultiScreen',
+                'getPermissionStatus',
+                'isPWA',
+                'setStartingPosition',
+
                 'getAllScreensDetails',
                 'getBrowserFrame',
                 'getCurrentLayout',
@@ -50,11 +58,6 @@ class ScreenDetails extends Base {
          * @protected
          */
         singleton: true
-    }
-
-    construct(config) {
-        super.construct(config);
-        this.getMonitorDetails();
     }
 
     /**
@@ -92,7 +95,7 @@ class ScreenDetails extends Base {
      * @returns {Promise<boolean>}
      * @private
      */
-    async askForPermission() {
+    async getPermissionStatus() {
         let state;
 
         // todo add this later
@@ -105,32 +108,35 @@ class ScreenDetails extends Base {
         //     if(err.name !== "TypeError") {
         //         state = `${err.name}: ${err.message}`;
         //     }
-            // The old permission name.
-            try {
-                ({state} = await navigator.permissions.query({
-                    name: "window-placement",
-                }));
-            } catch (err) {
-                if(err.name === "TypeError") {
-                    state = "Window management not supported.";
-                }
-                state = `${err.name}: ${err.message}`;
+        // The old permission name.
+        try {
+            ({state} = await navigator.permissions.query({
+                name: "window-placement",
+            }));
+        } catch (err) {
+            if(err.name === "TypeError") {
+                state = "Window management not supported.";
             }
+            state = `${err.name}: ${err.message}`;
+        }
         // }
 
-        return state === 'granted';
+        // return state === 'granted';
+        return state;
     }
 
-    // placement Google Leuzten
+    // Main Browser frame position
     getBrowserFrame() {
         return {
+            // Absolute pixels
             top: window.screenTop,
-            right: window.outerWidth,
             left: window.screenLeft,
-            bottom: window.outerHeight,
+            outerHeight: window.outerHeight,
+            outerWidth: window.outerWidth,
+            // Relative pixels based on devicePixelRatio
             width: window.innerWidth,
             height: window.innerHeight,
-            outerHeight: window.outerHeight,
+
             devicePixelRatio: window.devicePixelRatio
         };
     }
@@ -164,6 +170,7 @@ class ScreenDetails extends Base {
         }
     }
 
+    // old
     getAllScreensDetails() {
         const screenDetails = this.screenDetails.screens,
             current = this.singleScreenDetail(this.screenDetails.currentScreen),
@@ -177,7 +184,7 @@ class ScreenDetails extends Base {
         });
 
         // remove current from all and add current
-        for(const position in screenObject) {
+        for (const position in screenObject) {
             const item = screenObject[position];
             if(item.left === current.left && item.top === current.top) {
                 delete screenObject[position];
@@ -190,6 +197,67 @@ class ScreenDetails extends Base {
         return screenObject;
     }
 
+    // new
+    getAllScreens() {
+        const screenDetails = this.screenDetails.screens,
+            screenArray = [];
+
+        screenDetails.forEach((screen) => {
+            const detailedScreen = this.singleScreenDetail(screen);
+
+            screenArray.push(detailedScreen);
+        });
+
+        return screenArray;
+    }
+
+    getWindowScreen() {
+        return this.singleScreenDetail(this.screenDetails.currentScreen);
+    }
+
+    isMultiScreen() {
+        return window.screen.isExtended;
+    }
+
+    isPWA() {
+        let displayMode = 'browser',
+            isPWA = false;
+        const mqStandAlone = '(display-mode: standalone)';
+        if(navigator.standalone || window.matchMedia(mqStandAlone).matches) {
+            displayMode = 'standalone';
+            isPWA = true;
+        }
+
+        if(!isPWA) {
+            // todo Abfrage sobald PWA installiert wurde
+            window.addEventListener('appinstalled', async (event) => {
+                Neo.main.DomEvents.sendMessageToApp({
+                    type: 'appinstalled',
+                    data: {value1: true}
+                });
+            });
+        }
+
+        return isPWA;
+    }
+
+    async askForPermission() {
+        let state;
+
+        await window.getScreenDetails()
+            .then(() => {state  = 'granted';})
+            .catch(() => {state = 'denied';})
+
+        return state;
+    }
+
+    setStartingPosition() {
+        const screen = window.screen;
+        window.resizeTo((screen.availWidth-235),(screen.availHeight-5));
+        window.moveTo(0,5);
+    }
+
+
     /**
      * @returns {String}
      * @private
@@ -200,7 +268,7 @@ class ScreenDetails extends Base {
             supportsScreenDetails = 'getScreenDetails' in window;
 
         if(hasMultiple && supportsScreenDetails) {
-            this.askForPermission().then(permission => {
+            this.getPermissionStatus().then(permission => {
                 if(permission) {
                     window.getScreenDetails().then(sd => {
                         this.screenDetails = sd;
@@ -282,7 +350,7 @@ class ScreenDetails extends Base {
         const screenDetails = this.screenDetails;
         const otherScreen = screenDetails.screens.find(s => !s.isPrimary);
 
-        console.log('###', otherScreen.availTop);
+        // console.log('###', otherScreen.availTop);
         // window.open(url, '_blank',
         window.open('', 'about:blank',
             `left=${otherScreen.availLeft},` +
@@ -304,29 +372,41 @@ class ScreenDetails extends Base {
 
     windowMap = new Map();
 
-    windowCreate(data) {
-        let newWindow = window.open('', 'about:blank',
-            `left=${data.position.left},` +
-            `top=${data.position.top},` +
-            `width=${data.position.width},` +
-            `height=${data.position.height},` +
-            `directories=0,titlebar=0,toolbar=no,location=no,status=yes,menubar=no,scrollbars=no,resizable=no`
-        );
+    async windowCreate(data) {
+        const windowName = data.name;
+        console.log(data.position.height);
+        Neo.Main.windowOpen({
+            url: `../externalWindow/index.html`,
+            windowFeatures: `height=${data.position.height},left=${data.position.left},top=${data.position.top},width=${data.position.width}`,
+            windowName
+        });
 
-        newWindow.document.write("<html><body><p>Dies ist ein neues Fenster mit Quelltext statt URL.</p></body></html>");
-        // newWindow.document.write("<html><head><title>Neues Fenster</title></head><body><p>Dies ist ein neues Fenster mit Quelltext statt URL.</p></body></html>");
+//        Neo.apps.register('t1');
+
+        let newWindow = Neo.Main.openWindows[windowName];
+
+        // let newWindow = window.open('', 'about:blank',
+        //     `left=${data.position.left},` +
+        //     `top=${data.position.top},` +
+        //     `width=${data.position.width},` +
+        //     `height=${data.position.height},` +
+        //     `directories=0,titlebar=0,toolbar=no,location=no,status=yes,menubar=no,scrollbars=no,resizable=no`
+        // );
+        //
+        // newWindow.document.write("<html><body><p>Dies ist ein neues Fenster mit Quelltext statt URL.</p></body></html>");
+        // // newWindow.document.write("<html><head><title>Neues Fenster</title></head><body><p>Dies ist ein neues Fenster mit Quelltext statt URL.</p></body></html>");
         /**
          * We have to get the initial size and keep it, due to
          * resizing problems
          * Other Events in order are focus, resize, blur (on stop dragging)
          */
         newWindow.addEventListener("focus", function () {
-            console.log("Window focus!", newWindow.height, newWindow.innerHeight, newWindow.outerHeight);
+            // console.log("Window focus!", newWindow.height, newWindow.innerHeight, newWindow.outerHeight);
             newWindow.keepSize = {width: newWindow.outerWidth, height: newWindow.outerHeight};
         });
         // 1
 
-        newWindow.name = data.name;
+//        newWindow.name = data.name;
         // register window
         this.windowMap.set(data.name, newWindow);
     }
@@ -338,9 +418,11 @@ class ScreenDetails extends Base {
     windowMove(data) {
         // console.log(data.name)
         let curWindow = this.windowMap.get(data.name);
-        if(curWindow.keepSize)
+
+        if(curWindow.keepSize && document.location.hash !== '#sizing=true')
             curWindow.resizeTo(curWindow.keepSize.width, curWindow.keepSize.height);
-        curWindow.moveTo(data.position.left, data.position.top);
+        // curWindow.moveTo(data.position.left, data.position.top);
+        curWindow.moveTo(data.position.x, data.position.y);
     }
 
     /**

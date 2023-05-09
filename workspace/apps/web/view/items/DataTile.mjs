@@ -15,7 +15,8 @@ class DataTile extends BaseContainer {
         height: 100,
         width: 195,
 
-        source: 'wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self&value=Hi',
+        //source: 'wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self&value=Hi',
+        source: 'wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self',
         connectionType_: 'webSocket',
 
         items: [{
@@ -112,7 +113,7 @@ class DataTile extends BaseContainer {
             socket.onmessage = function (msg) {
                 const data = msg.data;
 
-                console.log("Received: " + msg.data);
+//                console.log("Received: " + msg.data);
                 output.html = msg.data;
                 me.setState('receive');
 

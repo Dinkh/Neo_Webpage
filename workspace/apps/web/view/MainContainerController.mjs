@@ -6,16 +6,56 @@ import ItemsDialog   from './items/Dialog.mjs';
  * @extends Neo.controller.Component
  */
 class MainContainerController extends Component {
-    /**
-     * Flag to keep track if Navigation-Bar is has cls `small`
-     * Used in `onScroll`
-     * @type {boolean}
-     */
-    navigationIsSmall = false
-
-
     static config = {
         className: 'Web.view.MainContainerController'
+    }
+
+    async onConstructed() {
+        super.onConstructed();
+
+        let me = this;
+
+        this.checkMultiScreen();
+        this.checkPWA();
+        this.checkPermission();
+
+// debugger;
+//         Neo.currentWorker.on({
+//             connect   : me.onAppConnect,
+// //            disconnect: me.onAppDisconnect,
+//             scope     : me
+//         });
+//
+// //        me.component.on('mounted', me.onMainViewMounted, me);
+    }
+
+    async checkMultiScreen() {
+        const isMultiScreen = await Neo.main.addon.ScreenDetails.isMultiScreen();
+
+        this.getModel().setData({isMultiScreen: isMultiScreen ? 'granted' : 'denied'});
+    }
+
+    async checkPWA() {
+        const me = this,
+            isPWA = await Neo.main.addon.ScreenDetails.isPWA();
+
+        me.getModel().setData({isPWA: isPWA ? 'granted' : 'denied'});
+
+        if(isPWA) {
+            Neo.main.addon.ScreenDetails.setStartingPosition();
+        }
+
+        // todo update ViewModel when app installed
+        // me.on('appinstalled', () => {
+        //     me.getModel().setData({isPWA: true});
+        // })
+    }
+
+    async checkPermission() {
+        const me = this,
+            permissionState = await Neo.main.addon.ScreenDetails.getPermissionStatus();
+
+        me.getModel().setData({isDisplayGranted: permissionState});
     }
 
     /**
@@ -24,17 +64,59 @@ class MainContainerController extends Component {
      */
     onScroll(data) {
         const scrollPos = data.target.scrollTop,
-            comp = Neo.getComponent('navigation');
+            comp = Neo.getComponent('navigation').up(),
+            vm = this.getModel(),
+            isSmall = vm.getData('navigationIsSmall');
 
         // Remove the route from previous navigation-bar clicks
         Neo.Main.setRoute({value:''});
         // Add or Remove cls to enlarge or shrink the navigation-bar
-        if(scrollPos > 100 && !this.navigationIsSmall) {
+        if(scrollPos > 100 && !isSmall) {
             comp.addCls('small')
-            this.navigationIsSmall = true;
-        } else if(scrollPos < 100 && this.navigationIsSmall) {
+            vm.setData({navigationIsSmall: true});
+        } else if(scrollPos < 100 && isSmall) {
             comp.removeCls('small')
-            this.navigationIsSmall = false;
+            vm.setData({navigationIsSmall: false});
+        }
+    }
+
+    /**
+     * @param {Object} data
+     * @param {String} data.appName
+     */
+    onAppConnect(data) {
+        debugger;
+        let me = this,
+            name = data.appName,
+            model = me.getModel(),
+            item;
+
+        console.log('%c[i]%c onAppConnect ' + name, 'background-color: teal; color: white', '');
+
+        switch (name) {
+            case 'ColorPicker':
+                item = this.colorPicker;
+                break;
+            case 'MeasureTool':
+                item = this.measureTool;
+                break;
+        }
+
+        if(item) {
+            NeoArray.add(me.connectedApps, name);
+
+            Neo.apps[name].on('render', () => {
+                setTimeout(() => {
+                    item.parent.remove(item.view, false);
+//                    me.#getMainView(name).add(item.view);
+
+                    console.log(item.view);
+
+                    model.setData('selectedColor', model.getData('selectedColor'));
+
+                }, 100);
+            });
+
         }
     }
 }

@@ -17,6 +17,11 @@ class Dashboard extends Section {
         controller: DashboardController,
 
         cls: [ 'data-container' ],
+        help: '<i>click</i> and <i>drag&drop</i> a tile to another Screen. The connection does not get lost.<br><br>' +
+            'You can <i>add</i> a new WebSocket connection using the + button<br><br>' +
+            'The first connection is linked to <span class="link">https://www.piesocket.com/websocket-tester</span><br>' +
+            'You can <i>click</i> this button to <i>copy</i> the link to the clipboard,<br>' +
+            'visit the page, click connect and send messages to the websocket.<br>',
 
         items: [{
             ntype: 'component',
@@ -39,8 +44,27 @@ class Dashboard extends Section {
         }, {
             module: AddNew,
             reference: 'add-new',
-            hidden: true
+            hideMode: 'visibility'
         }]
+    }
+
+    construct(config) {
+        super.construct(config);
+
+        this.addDomListeners({
+            click: {
+                fn      : this.onHelpIconClick,
+                delegate: '.neo-section-help-icon',
+            }
+        });
+
+        this.items[2].hidden = true;
+    }
+
+    onHelpIconClick() {
+        Neo.main.addon.Navigator.clipboard({
+            value: 'https://www.piesocket.com/websocket-tester'
+        });
     }
 }
 

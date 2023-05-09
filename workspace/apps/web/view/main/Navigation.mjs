@@ -18,24 +18,24 @@ class Navigation extends Base {
             }, {
                 tag: 'i',
                 cls: 'brand',
-                innerHTML: 'Neo.MJS by Torsten Dinkheller'
+                innerHTML: 'Neo.MJS Multi Screen by Torsten Dinkheller'
             }, {
                 cls: 'spacer'
-            }, {
-                tag: 'nav',
-                cn: [{
-                    tag: 'a',
-                    href: '#monitor-layout',
-                    innerHTML: 'Monitor support'
-                }, {
-                    tag: 'a',
-                    href: '#dashboard',
-                    innerHTML: 'Dashboard'
-                }, {
-                    tag: 'a',
-                    href: '#footer',
-                    innerHTML: 'Contact'
-                }]
+            // }, {
+            //     tag: 'nav',
+            //     cn: [{
+            //         tag: 'a',
+            //         href: '#monitor-layout',
+            //         innerHTML: 'Monitor support'
+            //     }, {
+            //         tag: 'a',
+            //         href: '#dashboard',
+            //         innerHTML: 'Dashboard'
+            //     }, {
+            //         tag: 'a',
+            //         href: '#footer',
+            //         innerHTML: 'Contact'
+            //     }]
             }]
         }
     }

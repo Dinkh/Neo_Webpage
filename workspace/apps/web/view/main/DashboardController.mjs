@@ -13,17 +13,17 @@ class DashboardController extends Component {
     /**
      * Add a new Tile and Hide data-entry part
      */
-    onAddNewClick() {
+    async onAddNewClick() {
         const me = this,
             dashboard = me.component,
             form = dashboard.getReference('add-new'),
             isValid = form.validate();
 
-        if (isValid) {
+        if(isValid) {
             const dataContent = dashboard.getReference('data-content'),
                 data = form.getValues();
 
-            if(!data.type) data.type='webSocket';
+            if(!data.type) data.type = 'webSocket';
 
             dataContent.add({
                 ntype: 'data-tile',
@@ -32,15 +32,19 @@ class DashboardController extends Component {
             })
         } else {
             Neo.toast({
-                appName : dashboard.appName,
-                ui      : 'danger',
-                msg     : 'Missing Source.<br>Reopen to try again',
-                iconCls : 'fa-solid fa-circle-exclamation',
-                timeout : 7000
+                appName: dashboard.appName,
+                ui: 'danger',
+                closable: true,
+                msg: 'Missing Source.<br>Reopen to try again',
+                iconCls: 'fa-solid fa-circle-exclamation'
             })
         }
 
+
         form.hide();
+        await Neo.timeout(50);
+        dashboard.fire('sectionToggleHelp', true);
+        // todo add help again
     }
 
     /**
@@ -61,8 +65,10 @@ class DashboardController extends Component {
      * Show the data-entry part for new Data-Tiles
      */
     onEmptyTileClick() {
-        const addNew = this.component.getReference('add-new');
+        const dashboard = this.component,
+            addNew = dashboard.getReference('add-new');
 
+        dashboard.fire('sectionToggleHelp', false);
         addNew.hidden = false;
     }
 }

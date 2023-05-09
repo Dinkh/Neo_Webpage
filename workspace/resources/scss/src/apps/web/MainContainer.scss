@@ -1,6 +1,7 @@
 /* ANIMATED BACKGROUND */
 body > .web-main {
   overflow-y: auto;
+  overflow-x: hidden;
   user-select:none;
 
   background-image: var(--page-background-gradient);
@@ -25,4 +26,27 @@ body > .web-main {
   width: 75px;
   background: url("..//Neo.svg");
   background-size: 100% 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;  /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

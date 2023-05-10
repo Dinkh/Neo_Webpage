@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  background-color: transparent;
+  text-align: center;
+  padding: 1rem 2.5rem;
+}
+
+.granted {
+  color: darkseagreen;
+}
+
+.pending {
+  color: lightgoldenrodyellow;
+}
+
+.neo-button-glyph.neo-svg {
+  &::before {
+    display: inline-table;
+    width: 1.5rem;
+    height: 2rem;
+  }
+}

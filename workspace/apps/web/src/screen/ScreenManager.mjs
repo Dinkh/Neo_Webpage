@@ -2,7 +2,7 @@ import Base     from '../../../../node_modules/neo.mjs/src/manager/Base.mjs';
 import NeoArray from "../../../../node_modules/neo.mjs/src/util/Array.mjs";
 
 // auto create
-import BrowserWindow from "./BrowserWindow.mjs";
+import BrowserWindow from "../BrowserWindow.mjs";
 
 /**
  * Screen Manager
@@ -36,28 +36,27 @@ class ScreenManager extends Base {
      */
     async construct(config) {
         super.construct(config);
-//        await this.dragStart();
     }
 
-    async dragStart (e) {
-        await this.setScreens();
-        await this.setMainBrowserScreen();
-    }
+    // async dragStart (e) {
+    //     await this.setScreens();
+    //     await this.setMainBrowserScreen();
+    // }
 
-    async setScreens() {
-        await this.askForPermission();
-        const screens = await Neo.main.addon.ScreenDetails.getAllScreens();
+    // async setScreens() {
+    //     await this.askForPermission();
+    //     const screens = await Neo.main.addon.ScreenDetails.getAllScreens();
+    //
+    //     this.screens = screens;
+    // }
 
-        this.screens = screens;
-    }
+    // async setMainBrowserScreen() {
+    //     this.mainBrowserScreen = await Neo.main.addon.ScreenDetails.getWindowScreen();
+    // }
 
-    async setMainBrowserScreen() {
-        this.mainBrowserScreen = await Neo.main.addon.ScreenDetails.getWindowScreen();
-    }
-
-    setMouseOverScreen(mousePosition) {
-        this.mouseOverScreen = this.getScreenIdAtPosition(mousePosition)
-    }
+    // setMouseOverScreen(mousePosition) {
+    //     this.mouseOverScreen = this.getScreenIdAtPosition(mousePosition)
+    // }
 
     /**
      * HELPER - get the screen which is at Position
@@ -65,24 +64,24 @@ class ScreenManager extends Base {
      * @param {Object} position
      * @returns {*}
      */
-    getScreenIdAtPosition(position) {
-        return;
-
-        // todo calc the real position on the screen from the mouse position
-        const screens = this.screens;
-
-        for(let screenId in screens) {
-            console.log(screenId)
-            const screen = screens[screenId];
-
-            if(position.x >= screen.top && position.y >= screen.left
-                && position.x <= (screen.left+screen.width) && position.y <= (screen.top+screen.height)) {
-                console.log(screenId);
-                return screen;
-            }
-        }
-        console.log('---nothing---', position)
-    }
+    // getScreenIdAtPosition(position) {
+    //     return;
+    //
+    //     // todo calc the real position on the screen from the mouse position
+    //     const screens = this.screens;
+    //
+    //     for(let screenId in screens) {
+    //         console.log(screenId)
+    //         const screen = screens[screenId];
+    //
+    //         if(position.x >= screen.top && position.y >= screen.left
+    //             && position.x <= (screen.left+screen.width) && position.y <= (screen.top+screen.height)) {
+    //             console.log(screenId);
+    //             return screen;
+    //         }
+    //     }
+    //     console.log('---nothing---', position)
+    // }
 
     /**
      * HELPER - MousePos and browserWindow.innerHeight have to be recalculated
@@ -90,30 +89,30 @@ class ScreenManager extends Base {
      * @param {Object} screen  You can pass a screen otherwise the screen of the mouse
      * @returns {number}
      */
-    calcPos(pos, screen) {
-        if(!screen) return;
+    // calcPos(pos, screen) {
+    //     if(!screen) return;
+    //
+    //     const browserDPI = Web.src.screen.BrowserWindow.devicePixelRatio,
+    //         screenDPI = screen.devicePixelRatio;
+    //
+    //     return pos * browserDPI / screenDPI;
+    // }
 
-        const browserDPI = Web.src.screen.BrowserWindow.devicePixelRatio,
-            screenDPI = screen.devicePixelRatio;
+    // calcDimension(pos) {
+    //     const browserDPI = Web.src.screen.BrowserWindow.devicePixelRatio,
+    //         screenDPI = 2.5;
+    //
+    //     return pos * browserDPI / screenDPI;
+    // }
 
-        return pos * browserDPI / screenDPI;
-    }
-
-    calcDimension(pos) {
-        const browserDPI = Web.src.screen.BrowserWindow.devicePixelRatio,
-            screenDPI = 2.5;
-
-        return pos * browserDPI / screenDPI;
-    }
-
-    async askForPermission() {
-        if(!this.askedForPermission) {
-            this.hasPermission = await Neo.main.addon.ScreenDetails.askForPermission();
-            this.askedForPermission  = true;
-        }
-
-        if(!this.hasPermission) console.log('WARNING : NO PERMISSIONS GRANTED');
-    }
+    // async askForPermission() {
+    //     if(!this.askedForPermission) {
+    //         this.hasPermission = await Neo.main.addon.ScreenDetails.askForPermission();
+    //         this.askedForPermission  = true;
+    //     }
+    //
+    //     if(!this.hasPermission) console.log('WARNING : NO PERMISSIONS GRANTED');
+    // }
 }
 
 let instance = Neo.applyClassConfig(ScreenManager);

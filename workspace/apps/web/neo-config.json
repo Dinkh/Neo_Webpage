@@ -8,11 +8,12 @@
         "DragDrop",
         "LocalStorage",
         "Stylesheet",
-        "WS/ScreenDetails",
-        "WS/Navigator"
+        "WS/Navigator",
+        "WS/PWA",
+        "WS/ScreenDetails"
     ],
     "themes": ["neo-theme-web-light"],
     "useServiceWorker": false,
-    "useSharedWorkers": false,
+    "useSharedWorkers": true,
     "workerBasePath": "../../node_modules/neo.mjs/src/worker/"
 }

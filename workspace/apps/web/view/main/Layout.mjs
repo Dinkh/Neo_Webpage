@@ -48,6 +48,9 @@ class Layout extends Base {
 
         super.construct(config);
 
+        // todo redo layout
+        return;
+
         Neo.timeout(150).then(data => {
             let currentScreenLayout = Neo.main.addon.ScreenDetails.getCurrentLayout().then(data => {
                 console.log(data);

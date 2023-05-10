@@ -1,5 +1,7 @@
 import Base from '../../../../node_modules/neo.mjs/src/dialog/Base.mjs';
 import NeoArray from "../../../../node_modules/neo.mjs/src/util/Array.mjs";
+import WindowManager from "../../src/WindowManager.mjs";
+import BrowserWindow from "../../src/BrowserWindow.mjs";
 
 /**
  * @class Web.view.items.Dialog
@@ -16,39 +18,49 @@ class Dialog extends Base {
         resizable: false,
         items: [],
         dragZoneConfig: {alwaysFireDragMove: true},
+        // todo remove
+        windowStatus: false,
         domListeners: {
             'drag:start': async function (e) {
-
-                const offsetNeoWidth = 12,
-                    offsetNeoHeight = 27,
-                    screenManager = Web.src.screen.ScreenManager,
-                    newWindowWidth = screenManager.calcDimension(e.component.width),
-                    newWindowHeight = screenManager.calcDimension(e.component.height);
-
-                screenManager.dragStart(e);
-                Neo.main.addon.ScreenDetails.windowCreate({
-                    name: 't1',
-                    position: {
-                        left: e.screenX,
-                        top: e.screenY,
-                        width: e.component.width + offsetNeoWidth,
-                        height: e.component.height + offsetNeoHeight
-                    }
-                });
             },
             'drag:move': function (e) {
-                const screenOffsetX = -150,
-                    screenOffsetY = -15;
+                const me = this,
+                    browserMousePosition = {x: e.clientX, y: e.clientY},
+                    isInsideBrowser = BrowserWindow.isInside(browserMousePosition),
+                    hasWindow = me.windowStatus;
 
-                Neo.main.addon.ScreenDetails.windowMove({
-                    name: 't1',
-                    position: {
-                        x: e.screenX + screenOffsetX,
-                        y: e.screenY + screenOffsetY
+                if (isInsideBrowser && hasWindow) {
+                    WindowManager.windowClose(e.component.id);
+                    me.windowStatus = false;
+                    me.dragZone.dragProxy.show();
+                } else if (!isInsideBrowser) {
+                    if (!hasWindow) {
+                        me.dragZone.dragProxy.hide();
+                        WindowManager.windowCreate(e);
+                        me.windowStatus = true;
+                    } else {
+                        WindowManager.windowMoveTo(e);
                     }
-                })
+                }
+            },
+            'drag:end': function (e) {
+                const me = this,
+                    hasWindow = me.windowStatus;
+
+                if (hasWindow) {
+                    me.hide(false);
+                    Web.appConnect_registerDialogId(me.id, 'externalOnly');
+                }
             }
         }
+    }
+
+    onConstructed() {
+        super.onConstructed();
+
+        let me = this;
+
+        Web.appConnect_registerDialogId(me.id);
     }
 
     close() {

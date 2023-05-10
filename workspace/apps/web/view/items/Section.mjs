@@ -38,22 +38,12 @@ class Section extends Base {
         }
     }
 
-    construct(config) {
-        const me = this;
+    afterSetHelp(value) {
+        if(!value) return;
+        const vdom = this.vdom.cn[1];
 
-        super.construct(config);
-
-        this.addListener({
-            sectionToggleHelp: me.onToggleHelp,
-            scope: me
-        })
-    }
-
-    onToggleHelp(showHelp) {
-        const me = this;
-
-        me.vdom.cn[1].removeDom = !showHelp;
-        me.update();
+        vdom.cn[1].innerHTML = value;
+        vdom.removeDom = false;
     }
 
     async onHelpIconHover(data) {
@@ -70,14 +60,6 @@ class Section extends Base {
             vdom.removeDom = !isHidden;
             this.update();
         }
-    }
-
-    afterSetHelp(value) {
-        if(!value) return;
-        const vdom = this.vdom.cn[1];
-
-        vdom.cn[1].innerHTML = value;
-        vdom.removeDom = false;
     }
 
     getVdomItemsRoot() {

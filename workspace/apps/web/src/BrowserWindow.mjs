@@ -1,18 +1,18 @@
-import Base from '../../../../node_modules/neo.mjs/src/core/Base.mjs';
+import Base from '../../../node_modules/neo.mjs/src/core/Base.mjs';
 
 /**
  * Main Browser Window
- * @class Web.src.screen.BrowserWindow
+ * @class Web.src.BrowserWindow
  * @extends Neo.core.Base
  * @singleton
  */
 class BrowserWindow extends Base {
     static config = {
         /**
-         * @member {String} className='Web.src.screen.BrowserWindow'
+         * @member {String} className='Web.src.BrowserWindow'
          * @protected
          */
-        className: 'Web.src.screen.BrowserWindow',
+        className: 'Web.src.BrowserWindow',
         /**
          * @member {Boolean} singleton=true
          * @protected
@@ -32,28 +32,22 @@ class BrowserWindow extends Base {
     onConstructed() {
         super.onConstructed();
 
-        let me = this;
-
-        me.updateBrowserFrame();
-        // me.component.on('mounted', me.onMainViewMounted, me);
+        this.updateBrowserFrame();
     }
 
     async updateBrowserFrame() {
-        const frame = await Neo.main.addon.ScreenDetails.getBrowserFrame();
+        const frame = await Neo.Main.getWindowData();
 
-        this.top = frame.top;
-        this.right = frame.right;
-        this.left = frame.left;
-        this.bottom = frame.bottom;
-        this.width = frame.width;
-        this.height = frame.height;
+        this.top = frame.screenTop;
+        this.left = frame.screenLeft;
+        this.width = frame.innerWidth;
+        this.height = frame.innerHeight;
         this.outerHeight = frame.outerHeight;
-        this.devicePixelRatio = frame.devicePixelRatio;
     }
 
     isInside(mousePosition) {
-        return mousePosition.x > 0 || mousePosition.y > 0
-            || mousePosition.x < this.width || mousePosition.y < this.height;
+        return mousePosition.x > 0 && mousePosition.y > 0
+            && mousePosition.x < this.width && mousePosition.y < this.height;
     }
 }
 

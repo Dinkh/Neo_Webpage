@@ -1,15 +1,13 @@
 import Base     from '../../../node_modules/neo.mjs/src/core/Base.mjs';
-import NeoArray from "../../../node_modules/neo.mjs/src/util/Array.mjs";
 
 /**
  * Add Navigator functionality, which cannot be used in workers
+ *
  * @class Neo.main.addon.Navigator
  * @extends Neo.core.Base
  * @singleton
  */
 class Navigator extends Base {
-    screenDetails = null;
-
     static config = {
         /**
          * @member {String} className='Neo.main.addon.Navigator'
@@ -34,8 +32,7 @@ class Navigator extends Base {
     }
 
     /**
-     * Event currentScreenChange
-     * @private
+     * Add data.value to the clipboard
      */
     clipboard(data) {
         const type = "text/plain",

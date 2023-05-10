@@ -24,13 +24,6 @@ class Dashboard extends Section {
             'visit the page, click connect and send messages to the websocket.<br>',
 
         items: [{
-            ntype: 'component',
-            vdom: {cn: [
-                { tag: 'h1', innerHTML: 'Dashboard', style: {textAlign: 'center'} },
-                { tag: 'h2', innerHTML: 'you can use Neo.MJS like you use Graphana', style: {textAlign: 'center'} },
-                { style: {paddingBottom: '3rem'},  innerHTML: 'Klick an item to remove it to a dialog. Then move it out of the current screen to remove the dialog and use it as an external window.' }
-            ]}
-        }, {
             ntype: 'container',
             reference: 'data-content',
             cls: [ 'data-content' ],
@@ -58,7 +51,7 @@ class Dashboard extends Section {
             }
         });
 
-        this.items[2].hidden = true;
+        this.items[1].hidden = true;
     }
 
     onHelpIconClick() {

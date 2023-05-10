@@ -1,20 +1,22 @@
-import MainContainerModel       from './MainContainerModel.mjs';
 import Viewport                 from '../../../node_modules/neo.mjs/src/container/Viewport.mjs';
-import Layout                   from "./main/Layout.mjs";
+// ViewModel und ViewController
+import MainContainerModel       from './MainContainerModel.mjs';
 import MainContainerController  from "./MainContainerController.mjs";
+// SubViews
 import Dashboard                from "./main/Dashboard.mjs";
+import Instruction from "./main/Instruction.mjs";
 import Navigation               from "./main/Navigation.mjs";
+import StatusBar                from "./main/StatusBar.mjs";
+import ResetInstructions        from "./main/ResetInstructions.mjs";
+import Welcome                  from "./main/Welcome.mjs";
+
 import Footer                   from "./main/Footer.mjs";
-import StatusBar from "./main/StatusBar.mjs";
-import Welcome from "./main/Welcome.mjs";
-
-
 // Import ScreenManager to auto-run
 import ScreenManager from "../src/screen/ScreenManager.mjs";
 
 /**
  * @class Web.view.MainContainer
- * @extends Neo.model.Component
+ * @extends Neo.container.Viewport
  */
 class MainContainer extends Viewport {
     static config = {
@@ -23,10 +25,10 @@ class MainContainer extends Viewport {
          * @protected
          */
         className: 'Web.view.MainContainer',
-
+        // ViewModel und ViewController
         controller: MainContainerController,
         model: MainContainerModel,
-
+        // Styling
         cls: ['web-main'],
 
         layout: {
@@ -38,26 +40,27 @@ class MainContainer extends Viewport {
             id: 'navigation'
         }, {
             // allow the navigation to jump to the correct place
-            ntype: 'component',
-            height: 105,
-            style: {flex: 'none'}
+            ntype: 'component', height: 105, style: {flex: 'none'}
         }, {
             module: StatusBar
         }, {
+            // todo error => Tobi #4115
             module: Welcome,
-            id: 'Welcome',
-            bind: {hidden: data => data.isDisplayGranted === 'granted'}
+            bind: {hidden: data => data.isDisplayGranted !== 'prompt'}
         }, {
-            module: Layout,
-            id: 'monitor-layout',
+            module: ResetInstructions,
+            bind: {hidden: data => data.isDisplayGranted !== 'denied'}
+        }, {
+            module: Instruction,
+            bind: {hidden: data => data.isDisplayGranted !== 'granted'}
+        // }, {
+        //     module: Layout,
         //     bind: {hidden: data => data.isDisplayGranted !== 'granted'}
         }, {
             module: Dashboard,
-            id: 'dashboard',
-        //     bind: {hidden: data => data.isDisplayGranted !== 'granted'}
+            bind: {hidden: data => data.isDisplayGranted !== 'granted'}
         }, {
             module: Footer,
-            id: 'footer',
             flex: 1
         }],
 

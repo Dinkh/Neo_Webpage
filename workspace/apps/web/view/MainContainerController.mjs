@@ -1,4 +1,6 @@
 import Component from '../../../node_modules/neo.mjs/src/controller/Component.mjs';
+import AppConnect from "../src/mixin/AppConnect.mjs";
+// uses
 import ItemsDialog   from './items/Dialog.mjs';
 
 /**
@@ -7,7 +9,14 @@ import ItemsDialog   from './items/Dialog.mjs';
  */
 class MainContainerController extends Component {
     static config = {
-        className: 'Web.view.MainContainerController'
+        className: 'Web.view.MainContainerController',
+
+        /**
+         * @member {Array} mixins=[DeltaUpdates, Observable]
+         */
+        mixins: [
+            AppConnect
+        ],
     }
 
     async onConstructed() {
@@ -19,14 +28,7 @@ class MainContainerController extends Component {
         this.checkPWA();
         this.checkPermission();
 
-// debugger;
-//         Neo.currentWorker.on({
-//             connect   : me.onAppConnect,
-// //            disconnect: me.onAppDisconnect,
-//             scope     : me
-//         });
-//
-// //        me.component.on('mounted', me.onMainViewMounted, me);
+        this.ac_constructor();
     }
 
     async checkMultiScreen() {
@@ -37,21 +39,36 @@ class MainContainerController extends Component {
 
     async checkPWA() {
         const me = this,
-            isPWA = await Neo.main.addon.ScreenDetails.isPWA();
+            isPWA = await Neo.main.addon.PWA.isPWA();
 
         me.getModel().setData({isPWA: isPWA ? 'granted' : 'pendend'});
 
-        if(isPWA) {
-            Neo.main.addon.ScreenDetails.setStartingPosition();
+        if (isPWA) {
+            Neo.main.addon.PWA.applyStartingPosition();
+        } else {
+            // todo Tobi => globaler Event listener
+            // Neo.global.fire('appinstalled')
+            // Neo.global.on();
+            // Neo.on('appinstalled')
+            // Neo.main.addon.PWA.registerAppInstalledEventListener(me.id);
+            // me.addDomListeners({
+            //     appinstalled: me.changeAppInstalledFn
+            // });
         }
 
-        me.addDomListeners('appinstalled', () => {
-            me.getModel().setData({isPWA: true});
-        })
+        // me.addDomListeners('appinstalled', () => {
+        //     debugger;
+        //     me.getModel().setData({isPWA: true});
+        // })
+
         // todo update ViewModel when app installed
         // me.on('appinstalled', () => {
         //     me.getModel().setData({isPWA: true});
         // })
+    }
+
+    changeAppInstalledFn() {
+        debugger;
     }
 
     async checkPermission() {
@@ -80,46 +97,6 @@ class MainContainerController extends Component {
         } else if(scrollPos < 100 && isSmall) {
             comp.removeCls('small')
             vm.setData({navigationIsSmall: false});
-        }
-    }
-
-    /**
-     * @param {Object} data
-     * @param {String} data.appName
-     */
-    onAppConnect(data) {
-        debugger;
-        let me = this,
-            name = data.appName,
-            model = me.getModel(),
-            item;
-
-        console.log('%c[i]%c onAppConnect ' + name, 'background-color: teal; color: white', '');
-
-        switch (name) {
-            case 'ColorPicker':
-                item = this.colorPicker;
-                break;
-            case 'MeasureTool':
-                item = this.measureTool;
-                break;
-        }
-
-        if(item) {
-            NeoArray.add(me.connectedApps, name);
-
-            Neo.apps[name].on('render', () => {
-                setTimeout(() => {
-                    item.parent.remove(item.view, false);
-//                    me.#getMainView(name).add(item.view);
-
-                    console.log(item.view);
-
-                    model.setData('selectedColor', model.getData('selectedColor'));
-
-                }, 100);
-            });
-
         }
     }
 }

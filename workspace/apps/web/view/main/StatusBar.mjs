@@ -18,7 +18,7 @@ class StatusBar extends Base {
         items: [{
             ntype: 'button',
             text: 'Freigabe',
-            iconCls: 'icon-permission',
+            iconCls: 'neo-svg icon-permission',
             bind: {
                 ui: data => data.isDisplayGranted,
                 displaySmall: data => data.navigationIsSmall,
@@ -28,7 +28,7 @@ class StatusBar extends Base {
         },{
             ntype: 'button',
             text: 'Run as PWA',
-            iconCls: 'icon-pwa',
+            iconCls: 'neo-svg icon-pwa',
             disabled: true,
             bind: {
                 ui: data => data.isPWA,
@@ -37,7 +37,7 @@ class StatusBar extends Base {
         },{
             ntype: 'button',
             text: 'Multi Screen',
-            iconCls: 'icon-multiscreen',
+            iconCls: 'neo-svg icon-multiscreen',
             disabled: true,
             bind: {
                 ui: data => data.isMultiScreen,

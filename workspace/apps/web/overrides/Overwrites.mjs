@@ -27,6 +27,7 @@ Neo.overwrites = {
         },
         button: {
             Base: {
+                // todo Ticket aufmachen
                 displaySmall_: false,
                 orgText: null,
                 afterSetDisplaySmall(newValue) {
